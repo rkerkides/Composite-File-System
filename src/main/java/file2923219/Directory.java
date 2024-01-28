@@ -3,10 +3,11 @@ package file2923219;
 import java.util.ArrayList;
 
 public class Directory implements Component {
-    private String name;
+    private final String name;
     private int size;
     private int count;
-    private ArrayList<Component> components;
+    private final ArrayList<Component> components;
+    private static String originalPrefix = "";
 
     public Directory(String name) {
         this.name = name;
@@ -58,17 +59,28 @@ public class Directory implements Component {
     public String display(String prefix) {
         StringBuilder sb = new StringBuilder();
         sb.append(this);
+
+        // Check if this is the first call and set the originalPrefix
+        if (originalPrefix.isEmpty()) {
+            originalPrefix = prefix;
+        }
+
         for (Component component : components) {
             if (component instanceof Directory) {
                 sb.append("\n").
                         append(prefix).
-                        append(component.display(prefix + prefix));
+                        append(component.display(originalPrefix + prefix));
             } else if (component instanceof File) {
                 sb.append("\n").
-                        append(prefix).
                         append(component.display(prefix));
             }
         }
+
+        // Reset the originalPrefix at the end of the top-level call
+        if (prefix.equals(originalPrefix)) {
+            originalPrefix = "";
+        }
+
         return sb.toString();
     }
 

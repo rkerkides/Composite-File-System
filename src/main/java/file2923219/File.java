@@ -1,8 +1,8 @@
 package file2923219;
 
 public class File implements Component{
-    private String name;
-    private int size;
+    private final String name;
+    private final int size;
 
     public File(String name, int size) {
         this.name = name;
@@ -26,7 +26,7 @@ public class File implements Component{
 
     @Override
     public String display(String prefix) {
-        return String.format("%s (%s)", this.name, this.size);
+        return prefix + String.format("%s (%s)", this.name, this.size);
     }
 
     @Override
