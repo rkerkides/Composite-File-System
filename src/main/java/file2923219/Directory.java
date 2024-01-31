@@ -7,7 +7,6 @@ public class Directory implements Component {
     private int size;
     private int count;
     private final ArrayList<Component> components;
-    private static String originalPrefix = "";
 
     public Directory(String name) {
         this.name = name;
@@ -57,30 +56,23 @@ public class Directory implements Component {
 
     @Override
     public String display(String prefix) {
+        return displayHelper(prefix, prefix);
+    }
+
+    public String displayHelper(String originalPrefix, String prefix) {
         StringBuilder sb = new StringBuilder();
         sb.append(this);
-
-        // Check if this is the first call and set the originalPrefix
-        if (originalPrefix.isEmpty()) {
-            originalPrefix = prefix;
-        }
 
         for (Component component : components) {
             if (component instanceof Directory) {
                 sb.append("\n").
                         append(prefix).
-                        append(component.display(originalPrefix + prefix));
+                        append(((Directory) component).displayHelper(originalPrefix, prefix + originalPrefix));
             } else if (component instanceof File) {
                 sb.append("\n").
                         append(component.display(prefix));
             }
         }
-
-        // Reset the originalPrefix at the end of the top-level call
-        if (prefix.equals(originalPrefix)) {
-            originalPrefix = "";
-        }
-
         return sb.toString();
     }
 

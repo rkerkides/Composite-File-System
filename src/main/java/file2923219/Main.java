@@ -27,8 +27,9 @@ public class Main {
         personal.add(familyHoliday);
         personal.add(portrait);
         misc.add(wallpaper);
+        personal.add(misc);
 
         // Display the directory structure
-        System.out.println(root.display("\t"));
+        System.out.println(root.display("+-"));
     }
 }
