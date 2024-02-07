@@ -30,6 +30,8 @@ public class Main {
         personal.add(misc);
 
         // Display the directory structure
-        System.out.println(root.display("+-"));
+        System.out.println(root.display("\t"));
+
+        System.out.println(root.search("wallpaper").getName());
     }
 }

@@ -17,14 +17,14 @@ public class Directory implements Component {
 
     public void add(Component component) {
         this.components.add(component);
-        this.size += component.getSize(); // Increase the size
-        this.count += component.getCount(); // Increase the count
+        this.size += component.getSize();
+        this.count += component.getCount();
     }
 
     public void remove(Component component) {
         this.components.remove(component);
-        this.size -= component.getSize(); // Decrease the size
-        this.count -= component.getCount(); // Decrease the count
+        this.size -= component.getSize();
+        this.count -= component.getCount();
     }
 
     @Override
@@ -82,7 +82,7 @@ public class Directory implements Component {
             if (component instanceof Directory) {
                 Component result = component.search(name);
                 if (result != null) {
-                    return component;
+                    return result;
                 }
             } else if (component.getName().equals(name)) {
                 return this;
